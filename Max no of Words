@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int mostWordsFound(char** sentences, int sentencesSize) {
+    int maxWords = 0;
+
+    for (int i = 0; i < sentencesSize; i++) {
+        int count = 1;
+        for (int j = 0; sentences[i][j] != '\0'; j++) {
+            if (sentences[i][j] == ' ')
+                count++;
+        }
+        if (count > maxWords)
+            maxWords = count; 
+    }
+    return maxWords;
+}
+
+int main() {
+    int n;
+    printf("Enter number of sentences: ");
+    scanf("%d", &n);
+    getchar();
+
+    char* sentences[n];
+    for (int i = 0; i < n; i++) {
+        sentences[i] = (char*)malloc(100 * sizeof(char));
+        printf("Enter sentence %d: ", i + 1);
+        fgets(sentences[i], 100, stdin);
+
+        size_t len = strlen(sentences[i]);
+        if (sentences[i][len - 1] == '\n')
+            sentences[i][len - 1] = '\0';
+    }
+
+    int maxWords = mostWordsFound(sentences, n);
+    printf("Maximum number of words in a sentence: %d\n", maxWords);
+
+    for (int i = 0; i < n; i++)
+        free(sentences[i]);
+
+    return 0;
+}
