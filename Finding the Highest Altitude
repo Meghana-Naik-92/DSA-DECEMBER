@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int largestAltitude(int* gain, int gainSize) {
+    int maxAltitude = 0;
+    int currentAltitude = 0;
+
+    for (int i = 0; i < gainSize; i++) {
+        currentAltitude += gain[i];
+        if (currentAltitude > maxAltitude)
+            maxAltitude = currentAltitude;
+    }
+    return maxAltitude;
+}
+
+int main() {
+    int n;
+    printf("Enter number of gains: ");
+    scanf("%d", &n);
+
+    int gain[n];
+    printf("Enter gains:\n");
+    for (int i = 0; i < n; i++)
+        scanf("%d", &gain[i]);
+
+    int result = largestAltitude(gain, n);
+    printf("Highest altitude reached: %d\n", result);
+    return 0;
+}
